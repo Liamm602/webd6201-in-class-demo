@@ -3,6 +3,11 @@ var displayEvent = document.getElementById("displayEvent");
 
 var userDisplay = document.getElementById("userDisplay");
 var passDisplay = document.getElementById("passDisplay");
+var navbarProject = document.getElementById("projectsNav");
+
+
+
+
 
 // welcomeLabel.addEventListener("mouseover", function()
 // {
