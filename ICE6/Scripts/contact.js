@@ -1,4 +1,4 @@
-class Contact {
+(function (core) {class Contact {
 
     // Constructor
     constructor(name, contactNumber, emailAddress) {
@@ -51,4 +51,5 @@ class Contact {
     toString() {
         return `Full Name is ${ this.Name }\nContact Information is ${ this.ContactNumber }\nEmail Address is ${ this.EmailAddress }`
     }
-}
+}core.Contact = Contact
+})(core || (core = {}))

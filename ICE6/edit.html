@@ -47,23 +47,24 @@
   </div>
 
   <main class="container mt-5">
-    <form method="get" id="editForm" name="editForm" class="col-lg-6 col-md-10 col-sm-10">
-      <div class="input-group mb-3">
-        <span class="input-group-text">Name</span>
-        <input type="text" class="form-control" id="fullName" name="fullName" placeholder="e.g. John Doe">
-      </div>
-      <div class="input-group mb-3">
-        <span class="input-group-text">Contact Number</span>
-        <input type="text" class="form-control" id="contactNumber" name="contactNumber" placeholder="e.g. 6471234567">
-      </div>
-      <div class="input-group mb-3">
-        <span class="input-group-text">Email Address</span>
-        <input type="text" class="form-control" id="emailAddress" name="emailAddress" placeholder="e.g. johndoe@gmail.com">
-      </div>
-   
-      <button type="submit" class="btn btn-primary" id="editButton"><i class="fas fa-edit fa-lg"></i> Edit</button>
-      <button type="reset" class="btn btn-warning" id="resetButton"><i class="fas fa-undo fa-lg"></i> Cancel</button>
-    </form>
+    <div class="row justify-content-lg-center g-3">
+      <form method="get" id="editForm" name="editForm" class="col-lg-6 col-md-10 col-sm-10">
+        <div class="input-group mb-3">
+          <span class="input-group-text">Name</span>
+          <input type="text" class="form-control" id="fullName" name="fullName" placeholder="e.g. John Doe">
+        </div>
+        <div class="input-group mb-3">
+          <span class="input-group-text">Contact Number</span>
+          <input type="text" class="form-control" id="contactNumber" name="contactNumber" placeholder="e.g. 6471234567">
+        </div>
+        <div class="input-group mb-3">
+          <span class="input-group-text">Email Address</span>
+          <input type="text" class="form-control" id="emailAddress" name="emailAddress" placeholder="e.g. johndoe@gmail.com">
+        </div>
+        <button type="submit" class="btn btn-primary" id="editButton"><i class="fas fa-edit fa-lg"></i> Edit</button>
+        <button type="reset" class="btn btn-warning" id="resetButton"><i class="fas fa-undo fa-lg"></i> Cancel</button>
+      </form>
+    </div>
   </main>
   
 
@@ -73,6 +74,7 @@
     crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
   <script src="./scripts/EventHandler.js"></script>
+  <script src="./scripts/namespace.js"></script>
   <script src="./scripts/contact.js"></script>
   <script src="./scripts/main.js"></script>
 </body>
