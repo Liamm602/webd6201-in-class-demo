@@ -7,10 +7,7 @@ var navbarProject = document.getElementById("projectsNav");
 
 
 
-newtitle = "LOL";
 
-navbarProject.textContent = newtitle;
-navbarProject.setAttribute("class", "nav-link");
 
 
 navbarProject = document.createElement("i");
