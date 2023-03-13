@@ -1,6 +1,11 @@
 (function () {
-
-    function DisplayNavBar() {
+/**
+ * This function uses ajax to open a connection to a server and returns a data payload to the callback function
+ * @param {string} method 
+ * @param {string} url 
+ * @param {function} callback 
+ */
+    function AjaxRequest(method,url,callback) {
         // AJAX
         // instantiate the XHR Object
         let XHR = new XMLHttpRequest()
@@ -8,15 +13,31 @@
         // add event listener for readystatechange
         XHR.addEventListener("readystatechange", () => {
             if (XHR.readyState === 4 && XHR.status === 200) {
-                $('#navigationBar').html(XHR.responseText)
+               if(typeof callback === 'function')
+               {
+                callback(XHR.responseText)
+               } else
+               {
+                console.error("ERROR: callback is not a function");
+               }
             }
         })
 
         // connect and get data
-        XHR.open("GET", "./static/header.html")
+        XHR.open(method, url)
 
         // send request to server to await response
         XHR.send()
+    }
+    /**g
+     * 
+     * @param {HTML} htmldata 
+     */
+    function LoadHeader(htmldata)
+    {
+        $('#navigationBar').html(htmldata)
+        $(`li>a:contains(${ document.title})`).addClass('active')
+        CheckLogin()
     }
 
     function DisplayHome() {
@@ -30,6 +51,8 @@
         let secondString = `${ firstString } main paragraph that we added through javascript and this is also on GitHub Pages`
 
         $("main").addClass("container").append(`<p id="MainParagraph" class="mt-3 container">${ secondString }</p>`)
+
+       
     }
 
     function DisplayProjects() {
@@ -94,6 +117,7 @@
     }
 
     function DisplayContactList() {
+        
         if (localStorage.length > 0) {
             let contactList = document.getElementById("contactList") // Our contact list in the table of the contact-list page
 
@@ -199,41 +223,94 @@
         console.log("References Page")
     }
 
-    function DispayLoginPage() {
+    function DisplayLoginPage() {
         console.log("Login Page")
+        let messageArea = $('#messageArea')
+        messageArea.hide()
+
+
+        $('#loginButton').on('click', function(){
+            let success = false
+
+            let newUser = new core.User()
+
+
+            $.get('./Data/user.json', function(data){
+            for (const user of data.users){
+                if(username.value == user.Username && password.value == user.Password){
+                    newUser.fromJSON(user)
+                    success = true
+                    break
+                }
+            }
+            })
+            if(success){
+                sessionStorage.setItem('user', newUser.serialize())
+
+                messageArea.removeAttr('class').hide()
+
+                Location.href = 'contact-list.html'
+            }else{
+                $('username').trigger('focus').trigger('select')
+                messageArea.addClass('alert alert-danger').text("Error, Invaid login, username or password is incorrect").show()
+            }
+        })
+        $('cancelButton').on('click', function(){
+            document.form[0].reset()
+
+            location.href = 'index.html'
+        })
+
+ 
+ 
     }
-    
+    function CheckLogin(){
+        if(sessionStorage.getItem("user")){
+            $('#login').html(
+                `<a id="logout" class="nav-link" href="./logout.html"><i class="fas fa-sign-out-alt"></i> Logout</a>`
+            )
+            $('#logout').on('click', function(){
+                sessionStorage.clear()
+
+                location.href = "login.html"
+            })
+        }
+
+    }
+   
     function DisplayRegisterPage() {
         console.log("Registration Page")
     }
     
     function Start() {
+
+        AjaxRequest("GET", "./static/header.html", LoadHeader)
         console.log("App Started Successfully!")
 
         switch (document.title) {
             case "Home - WEBD6201 Demo":
                 DisplayHome()
-                DisplayNavBar()
+               
                 break
-            case "Projects - WEBD6201 Demo":
+            case "Projects":
                 DisplayProjects()
                 break
-            case "Contact Us - WEBD6201 Demo":
+            case "Contact Us":
                 DisplayContacts()
                 break
-            case "Contact List - WEBD6201 Demo":
+            case "Contact List":
                 DisplayContactList()
                 break
-            case "References - WEBD6201 Demo":
+            case "References":
                 DisplayReferences()
                 break
-            case "Edit - WEBD6201 Demo":
+            case "Edit":
                 DisplayEditPage()
                 break
-            case "Login - WEBD6201 Demo":
+            case "Login":
                 DisplayLoginPage()
                 break
-            case "Register - WEBD6201 Demo":
+            case "Register":
                 DisplayRegisterPage()
                 break
         }
