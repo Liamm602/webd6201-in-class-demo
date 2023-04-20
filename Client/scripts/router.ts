@@ -129,4 +129,4 @@ let routee: string = location.pathname // alias for location.pathname
 
 // if route is found in the Routing Table
 // variable = (if condition) ? (if condition is true) : (else false)
-router.ActiveLink = (router.Find(route) > -1) ? (route == "/") ? "home" : route.substring(1) : "404";
+router.ActiveLink = (router.Find(routee) > -1) ? (routee == "/") ? "home" : routee.substring(1) : "404";
